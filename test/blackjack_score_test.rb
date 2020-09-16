@@ -44,11 +44,14 @@ describe 'Blackjack Score' do
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
    # Arrange
-    hand = [5, 10, "Ace"]
+    hand1 = [ "Ace", 5, "Ace", 10, "Ace", "Ace"]
+    hand2 = [ "Ace", "Ace"]
     # Act
-    hand_score = blackjack_score(hand)
+    hand1_score = blackjack_score(hand1)
+    hand2_score = blackjack_score(hand2)
     # Assert
-    expect(hand_score).must_equal 16
+    expect(hand1_score).must_equal 19
+    expect(hand2_score).must_equal 12
   end
 
   it 'raises an ArgumentError for invalid cards' do
@@ -64,6 +67,9 @@ describe 'Blackjack Score' do
 
   it 'raises an ArgumentError for scores over 21' do
     # Arrange && Act && Assert
-
+    expect {
+      blackjack_score([10, "Queen", "Ace", "Ace"])
+    }.must_raise ArgumentError
   end
+
 end

@@ -17,11 +17,17 @@ def blackjack_score(hand)
       end
     end
   end
-  p new_hand
-  score = new_hand.reduce(:+)
 
-  if score > 21 && new_hand.include?(11)
+  #new_hand must be destructively sorted to later remove each Ace if score >21
+  score = new_hand.sort!.reduce(:+)
+
+  while score > 21 && new_hand.include?(11)
+    new_hand.pop
     score -= 10
+  end
+
+  if score > 21
+    raise ArgumentError.new("Score is over 21. BUST.")
   end
 
   return score

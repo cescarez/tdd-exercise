@@ -52,10 +52,18 @@ describe 'Blackjack Score' do
   end
 
   it 'raises an ArgumentError for invalid cards' do
+    # Arrange && Act && Assert
+    expect {
+      blackjack_score([10, 2, "Kangaroo", 5])
+    }.must_raise ArgumentError
 
+    expect {
+      blackjack_score(["Ace", "Jack", nil, 3])
+    }.must_raise ArgumentError
   end
 
   it 'raises an ArgumentError for scores over 21' do
+    # Arrange && Act && Assert
 
   end
 end

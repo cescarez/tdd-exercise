@@ -3,6 +3,7 @@
 VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 def blackjack_score(hand)
+  raise ArgumentError.new("Hand is tooooo big!") if hand.length > 5
 
   new_hand = hand.map do |card|
     if !VALID_CARDS.include?(card)
@@ -19,8 +20,6 @@ def blackjack_score(hand)
     end
   end
 
-
-
   #new_hand must be destructively sorted to later remove each Ace if score >21
   score = new_hand.sort!.reduce(:+)
 
@@ -29,13 +28,7 @@ def blackjack_score(hand)
     score -= 10
   end
 
-  if score > 21
-    raise ArgumentError.new("Score is over 21. BUST.")
-  end
-
-  if new_hand.count > 5
-    raise ArgumentError.new("Hand is tooooo big!")
-  end
+  raise ArgumentError.new("Score is over 21. BUST.") if score > 21
 
   return score
 end
